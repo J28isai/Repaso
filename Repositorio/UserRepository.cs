@@ -1,4 +1,5 @@
-﻿using Repaso.Model;
+﻿using CommunityToolkit.Mvvm.Input;
+using Repaso.Model;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -6,13 +7,20 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Repaso.Repositorio
 {
-    public class UserRepository : IUserRepository
+    public partial class UserRepository : IUserRepository
     {
 
-        private readonly string _path;
+        private readonly string _path = "users.json";
+
+        public UserRepository(string path)
+        {
+            _path = path;
+        }
+
         public void AgregarUsuario(List<User> users)
         {
             var dir = Path.GetDirectoryName(_path);
@@ -45,6 +53,8 @@ namespace Repaso.Repositorio
             {
                 return true;
             }
+
+
         }
 
         public List<User> ObtUsuarios()
