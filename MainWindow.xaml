@@ -3,10 +3,59 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Repaso"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="Repaso - Registro y Login" Height="520" Width="900">
+    <Grid Margin="16">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="3*" />
+        </Grid.ColumnDefinitions>
 
+        <StackPanel Grid.Column="0" Margin="8">
+            <TextBlock FontSize="18" FontWeight="Bold" Text="Registro" Margin="0,0,0,12" />
+
+            <TextBlock Text="Correo" />
+            <TextBox Margin="0,4,0,8" Text="{Binding Correo, UpdateSourceTrigger=PropertyChanged}" />
+
+            <TextBlock Text="Nombre" />
+            <TextBox Margin="0,4,0,8" Text="{Binding Nombre, UpdateSourceTrigger=PropertyChanged}" />
+
+            <TextBlock Text="Usuario" />
+            <TextBox Margin="0,4,0,8" Text="{Binding Usuario, UpdateSourceTrigger=PropertyChanged}" />
+
+            <TextBlock Text="Password" />
+            <TextBox Margin="0,4,0,12" Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}" />
+
+            <Button Content="Registrar" Height="32" Command="{Binding RegistrarCommand}" />
+        </StackPanel>
+
+        <StackPanel Grid.Column="1" Margin="8">
+            <TextBlock FontSize="18" FontWeight="Bold" Text="Iniciar sesión" Margin="0,0,0,12" />
+
+            <TextBlock Text="Usuario" />
+            <TextBox Margin="0,4,0,8" Text="{Binding LoginUsuario, UpdateSourceTrigger=PropertyChanged}" />
+
+            <TextBlock Text="Password" />
+            <TextBox Margin="0,4,0,12" Text="{Binding LoginPassword, UpdateSourceTrigger=PropertyChanged}" />
+
+            <Button Content="Entrar" Height="32" Command="{Binding IniciarSesionCommand}" />
+
+            <Border Background="#FFF4F7FB" Padding="10" CornerRadius="8" Margin="0,16,0,0">
+                <TextBlock Text="{Binding Mensaje}" TextWrapping="Wrap" />
+            </Border>
+        </StackPanel>
+
+        <StackPanel Grid.Column="2" Margin="8">
+            <TextBlock FontSize="18" FontWeight="Bold" Text="Usuarios registrados" Margin="0,0,0,12" />
+
+            <DataGrid ItemsSource="{Binding Usuarios}" AutoGenerateColumns="False" IsReadOnly="True" MinHeight="380">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Nombre" Binding="{Binding Name}" Width="*" />
+                    <DataGridTextColumn Header="Usuario" Binding="{Binding UserN}" Width="*" />
+                    <DataGridTextColumn Header="Correo" Binding="{Binding Correo}" Width="2*" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
     </Grid>
 </Window>

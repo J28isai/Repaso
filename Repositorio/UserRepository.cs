@@ -13,6 +13,14 @@ namespace Repaso.Repositorio
     {
 
         private readonly string _path;
+
+        public UserRepository(string? path = null)
+        {
+            _path = string.IsNullOrWhiteSpace(path)
+                ? Path.Combine(AppContext.BaseDirectory, "Data", "users.json")
+                : path;
+        }
+
         public void AgregarUsuario(List<User> users)
         {
             var dir = Path.GetDirectoryName(_path);
@@ -36,7 +44,7 @@ namespace Repaso.Repositorio
         public bool Login(string username, string password)
         {
             var usuarios = ObtUsuarios();
-            var user = usuarios.FirstOrDefault(a => a.UserN == username && a.Password == password );
+            var user = usuarios.FirstOrDefault(a => a.UserN == username && a.Password == password);
 
             if (user == null) { 
             return false;
